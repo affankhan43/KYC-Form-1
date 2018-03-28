@@ -4,8 +4,10 @@ session_start();
 		include 'core/funcs.php';
 		use \Curl\Curl;
 if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
-	echo "# code...";
-	print_r($_POST);
+	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
+
+	}
+	$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 }
 ?>
 <!doctype html>
