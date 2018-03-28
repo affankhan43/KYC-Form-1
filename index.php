@@ -2,8 +2,8 @@
 		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
 		use \Curl\Curl;
-if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username'])){
-	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username'])){
+if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
+	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		session_start();
 
 		$error = array();
@@ -12,6 +12,20 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username'])){
 
 			$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 			$put = new Curl();
+			$auth = "Bearer ".base64_decode($_GET['token']);
+			$put->setHeader('Authorization', $auth);
+    		$put->setHeader('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
+    		$put->post('http://52.171.129.143/public/api/kyc_list', array(
+    			'broker_id'=>$_GET['bind'],
+    			'userid'=>$_GET['bind'],
+    			'username'=>$_GET['bind'],
+    			''=>$_POST['passport'];
+    			''=>$_POST['fullname'],
+    			''=>$address,
+    			''=>$_POST['city'],
+    			''=>$_POST['country'],
+    			''=>$_POST['state'],
+    		));
 		}
 		else{
 			$error[0] = "Fill All Fields";
