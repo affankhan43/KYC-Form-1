@@ -1,8 +1,9 @@
 <?php
-		require __DIR__ . 'vendor/autoload.php';
+session_start();
+		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
 		use \Curl\Curl;
-if (isset($_POST['kyc-submit'])) {
+if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
 	echo "# code...";
 	print_r($_POST);
 }
@@ -53,6 +54,7 @@ if (isset($_POST['kyc-submit'])) {
 					<input type="text" class="form-control" name="state" placeholder="State/Province" required>
 					<br>
 					<input type="text" class="form-control" name="country" placeholder="Country" required>
+					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
 
 				<div class="form-group">
