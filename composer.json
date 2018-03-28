@@ -1,0 +1,6 @@
+{
+    "require": {
+        "twbs/bootstrap": "4.0.0",
+        "php-curl-class/php-curl-class": "@dev"
+    }
+}
