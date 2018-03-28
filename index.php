@@ -19,13 +19,19 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
     			'broker_id'=>$_GET['bind'],
     			'userid'=>$_GET['bind'],
     			'username'=>$_GET['bind'],
-    			''=>$_POST['passport'];
-    			''=>$_POST['fullname'],
-    			''=>$address,
-    			''=>$_POST['city'],
-    			''=>$_POST['country'],
-    			''=>$_POST['state'],
+    			'passport'=>$_POST['passport'];
+    			'fullname'=>$_POST['fullname'],
+    			'address'=>$address,
+    			'city'=>$_POST['city'],
+    			'country'=>$_POST['country'],
+    			'state'=>$_POST['state'],
     		));
+    		if ($put->error) {
+    			$error[1] = $put->errorMessage;
+    		}
+    		else{
+    			$error[2] = json_encode($put->response);
+    		}
 		}
 		else{
 			$error[0] = "Fill All Fields";
@@ -65,6 +71,16 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   			<?php if(isset($error[0])){ ?>
   			<div class="alert alert-danger" role="alert">
   				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
+			</div>
+			<?php } ?>
+			<?php if(isset($error[1])){ ?>
+  			<div class="alert alert-danger" role="alert">
+  				<strong>Oh snap!</strong> <?php echo $error[1]; ?>
+			</div>
+			<?php } ?>
+			<?php if(isset($error[2])){ ?>
+  			<div class="alert alert-sucess" role="alert">
+  				<strong>Oh snap!</strong> <?php echo $error[2]; ?>
 			</div>
 			<?php } ?>
   			<form method="post" enctype="multipart/form-data">
