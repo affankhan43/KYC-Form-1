@@ -3,9 +3,13 @@ session_start();
 		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
 		use \Curl\Curl;
+		$error = array();
 if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
 	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
 		$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+	}
+	else{
+		$error[0] = "Fill All Fields";
 	}
 }
 ?>
@@ -38,6 +42,11 @@ if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
   <body>
   	<div class="container">
   		<div class="col-md-6 kyc-form">
+  			<?php if(isset($error[0])){ ?>
+  			<div class="alert alert-danger" role="alert">
+  				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
+			</div>
+			<?php } ?>
   			<form method="post" enctype="multipart/form-data">
   				<div class="form-group">
   					<label for="fullname">Full Name</label>
@@ -46,7 +55,7 @@ if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
 
 				<div class="form-group">
 					<label for="address">Address</label>
-					<input type="text" class="form-control" name="street-line-1" placeholder="Street Line 1" required>
+					<input type="text" class="form-control" name="street-line-1" placeholder="Street Line 1">
 					<br>
 					<input type="text" class="form-control" name="street-line-2" placeholder="Street Line 2">
 					<br>
