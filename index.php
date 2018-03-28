@@ -1,17 +1,23 @@
 <?php
-session_start();
 		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
 		use \Curl\Curl;
+if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username'])){
+	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username'])){
+		session_start();
+
 		$error = array();
-if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
-	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
-		$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+		if(isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])){
+			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
+
+			$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+			$put = new Curl();
+		}
+		else{
+			$error[0] = "Fill All Fields";
+		}
 	}
-	else{
-		$error[0] = "Fill All Fields";
-	}
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -86,3 +92,4 @@ if (isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
+<?php } }?>
