@@ -1,4 +1,7 @@
 <?php
+		require __DIR__ . 'vendor/autoload.php';
+		include 'core/funcs.php';
+		use \Curl\Curl;
 if (isset($_POST['kyc-submit'])) {
 	echo "# code...";
 	print_r($_POST);
