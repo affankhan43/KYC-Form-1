@@ -1,37 +1,78 @@
 <?php
+//print_r(file_get_contents("C:\Users\Affan\Downloads\a12.png"));
+// $cFile = '@' . realpath($_FILES['passport']['tmp_name']);
+
+// $post = array('extra_info' => '123456','file_contents'=> $cFile);
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL,"http://52.171.129.143/public/api/kyc_form");
+// curl_setopt($ch, CURLOPT_POST,1);
+// curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+// curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//     "Accept: application/json",
+//     "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly81Mi4xNzEuMTI5LjE0My9wdWJsaWMvYXBpL2xvZ2luMiIsImlhdCI6MTUyMjI4NTk2OSwiZXhwIjoxNTIyMjg5NTY5LCJuYmYiOjE1MjIyODU5NjksImp0aSI6Inp2ZU1Sc2NRdXhhZDhtMGcifQ.aE5T4Z3MAqrAWK72G_6wSmS9Dki6WwbjYh-1WFtDVkI",
+//     "Cache-Control: no-cache"));
+// $result=curl_exec ($ch);
+// curl_close ($ch);
 		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
 		use \Curl\Curl;
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
-		session_start();
+		\session_start();
 
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_SESSION['xss_code_generate'])){
 			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
 
 			$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
-			$put = new Curl();
+			//$put = new Curl();
 			$auth = "Bearer ".base64_decode($_GET['token']);
-			$put->setHeader('Authorization', $auth);
-    		$put->setHeader('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
-    		$put->post('http://52.171.129.143/public/api/kyc_list', array(
-    			'broker_id'=>$_GET['bind'],
-    			'userid'=>$_GET['bind'],
-    			'username'=>$_GET['bind'],
-    			'passport'=>$_POST['passport'];
-    			'fullname'=>$_POST['fullname'],
-    			'address'=>$address,
-    			'city'=>$_POST['city'],
-    			'country'=>$_POST['country'],
-    			'state'=>$_POST['state'],
-    		));
-    		if ($put->error) {
-    			$error[1] = $put->errorMessage;
-    		}
-    		else{
-    			$error[2] = json_encode($put->response);
-    		}
+			$cFile = '@' . realpath($_FILES['passport']['tmp_name']);
+
+$post = array('broker_id' =>$_GET['bind'],'file_contents'=> $cFile);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,"http://52.171.129.143/public/api/kyc_form");
+curl_setopt($ch, CURLOPT_POST,1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    "Accept: application/json",
+    "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly81Mi4xNzEuMTI5LjE0My9wdWJsaWMvYXBpL2xvZ2luMiIsImlhdCI6MTUyMjI4NTk2OSwiZXhwIjoxNTIyMjg5NTY5LCJuYmYiOjE1MjIyODU5NjksImp0aSI6Inp2ZU1Sc2NRdXhhZDhtMGcifQ.aE5T4Z3MAqrAWK72G_6wSmS9Dki6WwbjYh-1WFtDVkI",
+    "Cache-Control: no-cache"));
+$result=curl_exec ($ch);
+curl_close ($ch);
+
+// 
+// 			$target_dir = 'C:\xampp\htdocs\kyc-form\uploads\ ';
+// $target_file = $target_dir . basename($_FILES["passport"]["name"]);
+// echo $target_file;
+// $uploadOk = 1;
+// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// $check = getimagesize($_FILES["passport"]["tmp_name"]);
+// print_r($check);
+// move_uploaded_file($_FILES["passport"]["tmp_name"], $target_file);
+			
+			//$put->setHeader('Authorization', $auth);
+    		//$put->setHeader('Content-Type', 'application/x-www-form-urlencoded');
+    		//$put->setHeader('content-type', 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
+    		// $put->setHeader('Accept', 'application/json');
+    		// $put->post('http://52.171.129.143/public/api/kyc_form', array(
+    		// 	'broker_id'=>$_GET['bind'],
+    		// 	'userid'=>$_GET['userid'],
+    		// 	'username'=>$_GET['username'],
+    		// 	'passport'=>'@'.'C:\xampp\htdocs\kyc-form\uploads\12.png',
+    		// 	'fullname'=>$_POST['fullname'],
+    		// 	'address'=>$address,
+    		// 	'city'=>$_POST['city'],
+    		// 	'country'=>$_POST['country'],
+    		// 	'state'=>$_POST['state'],
+    		// ));
+    		// if ($put->error) {
+    		// 	$error[1] = json_encode($put);
+    		// 	print_r($put);
+    		// }
+    		// else{
+    		// 	$error[2] = json_encode($put->response);
+    		// }
 		}
 		else{
 			$error[0] = "Fill All Fields";
