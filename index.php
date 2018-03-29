@@ -37,14 +37,15 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					"Content-Type: multipart/form-data; boundary=" . $delimiter,
 					"Content-Length: " . strlen($post_data)),
 			));
-		$response = curl_exec($curl);
-//		$info = curl_getinfo($curl);
-var_dump($response);
-$err = curl_error($curl);
-
-echo "error";
-var_dump($err);
-curl_close($curl);
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+			curl_close($curl);
+			if($err){
+				$error[1] = "cURL Error #:" . $err;
+			}
+			else{
+				$error[2] = $response;
+			}
 		}
 		else{
 			$error[0] = "Fill All Fields";
