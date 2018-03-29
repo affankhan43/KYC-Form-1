@@ -20,6 +20,42 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$files['passport'] = file_get_contents($f);
 			}
 			$url = "http://52.171.129.143/public/api/kyc_form";
+			$curl = curl_init();
+$boundary = uniqid();
+$delimiter = '-------------' . $boundary;
+
+$post_data = build_data_files($boundary, $fields, $files);
+
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $url,
+  CURLOPT_RETURNTRANSFER => 1,
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  //CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POST => 1,
+  CURLOPT_POSTFIELDS => $post_data,
+  CURLOPT_HTTPHEADER => array(
+    "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly81Mi4xNzEuMTI5LjE0My9wdWJsaWMvYXBpL2xvZ2luMiIsImlhdCI6MTUyMjI5NDM0MSwiZXhwIjoxNTIyMjk3OTQxLCJuYmYiOjE1MjIyOTQzNDEsImp0aSI6IkRNQ2RoOWRxbHk0cEpmZm8ifQ.E43-r7BPKZFy5FTNEKQGj_XrWOzfHr7J7m7kSNXo6lQ",
+    "Content-Type: multipart/form-data; boundary=" . $delimiter,
+    "Content-Length: " . strlen($post_data)
+  ),
+
+  
+));
+
+
+//
+$response = curl_exec($curl);
+
+$info = curl_getinfo($curl);
+var_dump($response);
+$err = curl_error($curl);
+
+echo "error";
+var_dump($err);
+curl_close($curl);
 		}
 		else{
 			$error[0] = "Fill All Fields";
