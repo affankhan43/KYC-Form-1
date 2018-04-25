@@ -122,10 +122,25 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="text" class="form-control" name="country" placeholder="Country" required>
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
-
+				<div class="form-group">
+					<label for="address">Phone #</label>
+					<input type="text" class="form-control" name="phone" placeholder="Phone #">
+				</div>
+				<div class="form-group">
+					<label for="address">Zip Code</label>
+					<input type="text" class="form-control" name="zip" placeholder="Area Zipcode">
+				</div>
+				<div class="form-group">
+					<label for="passport-image">Selfie With Passport</label>
+					<input type="file" name="passport_selfie" class="form-control-file" required>
+				</div>
 				<div class="form-group">
 					<label for="passport-image">Passport Image</label>
 					<input type="file" name="passport" class="form-control-file" required>
+				</div>
+				<div class="form-group">
+					<label for="passport-image">Paid Bill</label>
+					<input type="file" name="bill" class="form-control-file" required>
 				</div>
   
 				<div class="form-group">
