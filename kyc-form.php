@@ -14,10 +14,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			/*-- POST --*/
 			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
 			$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['bill']['tmp_name']);
-			$files = array();
-			foreach ($filenames as $f){
-				$files = file_get_contents($f);
-			}
+			$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
+			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
+			$files['bill'] = file_get_contents($_FILES['bill']['tmp_name']);
 			$url = "http://52.171.129.143/public/api/kyc_form";
 			$curl = curl_init();
 			$boundary = uniqid();
