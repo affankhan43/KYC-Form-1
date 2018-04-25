@@ -8,16 +8,15 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
-			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country'])){
-
-			$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
-			$auth = "Bearer ".base64_decode($_GET['token']);
+			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
+				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+				$auth = "Bearer ".base64_decode($_GET['token']);
 			/*-- POST --*/
-			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state']);
-			$filenames = array($_FILES['passport']['tmp_name']);
+			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
+			$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['bill']['tmp_name']);
 			$files = array();
 			foreach ($filenames as $f){
-				$files['passport'] = file_get_contents($f);
+				$files = file_get_contents($f);
 			}
 			$url = "http://52.171.129.143/public/api/kyc_form";
 			$curl = curl_init();
@@ -124,11 +123,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				</div>
 				<div class="form-group">
 					<label for="address">Phone #</label>
-					<input type="text" class="form-control" name="phone" placeholder="Phone #">
+					<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #">
 				</div>
 				<div class="form-group">
 					<label for="address">Zip Code</label>
-					<input type="text" class="form-control" name="zip" placeholder="Area Zipcode">
+					<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="Area Zipcode">
 				</div>
 				<div class="form-group">
 					<label for="passport-image">Selfie With Passport</label>
