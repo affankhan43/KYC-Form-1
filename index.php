@@ -98,7 +98,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			<?php } ?>
 			<?php if(isset($error[2])){ ?>
   			<div class="alert alert-success" role="alert">
-  				<strong>Oh snap!</strong> <?php echo $error[2]; ?>
+  				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
 			<?php } ?>
   			<form method="post" enctype="multipart/form-data">
