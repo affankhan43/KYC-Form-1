@@ -106,7 +106,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
 			<?php } ?>
-			
+			<?php if(!isset($error[3])){ ?>
   			<form method="post" enctype="multipart/form-data">
   				<div class="form-group">
   					<label for="fullname">Full Name</label>
@@ -151,6 +151,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
 				</div>
 			</form>
+		<?php } ?>
 		</div>
 	</div>
 
