@@ -47,7 +47,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					$error[2] = $data['error'];
 				}
 				else{
-					$error[2] = $data['message'];
+					$error[3] = $data['message'];
 				}
 			}
 		}
@@ -101,6 +101,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
 			<?php } ?>
+			<?php if(isset($error[3])){ ?>
+  			<div class="alert alert-success" role="alert">
+  				<strong> <?php echo $error[2]; ?> </strong>
+			</div>
+			<?php } ?>
+			
   			<form method="post" enctype="multipart/form-data">
   				<div class="form-group">
   					<label for="fullname">Full Name</label>
