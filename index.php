@@ -17,7 +17,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
 			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
 			$files['bill'] = file_get_contents($_FILES['bill']['tmp_name']);
-			$url = "http://52.171.129.143/public/api/kyc_form";
+			$url = "https://sys.pixiubit.com/api/kyc_form";
 			$curl = curl_init();
 			$boundary = uniqid();
 			$delimiter = '-------------' . $boundary;
