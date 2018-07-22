@@ -4,6 +4,7 @@
 		use \Curl\Curl;
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
+		session_start();
 		$error = array();
 		if(isset($_POST['kyc-submit'])){
 			if(check_code($_POST['xss_code'])){ echo "string";}
