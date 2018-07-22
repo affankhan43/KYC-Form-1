@@ -5,7 +5,8 @@
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		$error = array();
-		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
+		if(isset($_POST['kyc-submit'])){
+			if(check_code($_POST['xss_code'])){ echo "string";}
 			$error[0]="GO";
 		// 	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
 		// 		$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
