@@ -43,11 +43,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			else{
 				$data = json_decode($response);
 				print_r($data);
-				if($data['success'] == false){
-					$error[2] = $data['error'];
+				if($data->success == false){
+					$error[2] = $data->error;
 				}
 				else{
-					$error[3] = $data['message'];
+					$error[3] = $data->message;
 				}
 			}
 		}
