@@ -41,14 +41,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$error[1] = "cURL Error #:" . $err;
 			}
 			else{
-				print_r($response);
 				$data = json_decode($response);
-				print_r($data);
 				if($data->success == false){
 					$error[2] = $data->error;
 				}
 				else{
-					$error[3] = $data->message;
+					$success[0] = $data->message;
 				}
 			}
 		}
@@ -99,11 +97,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   			<div class="alert alert-success" role="alert">
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
-			<?php }elseif(isset($error[3])){ ?>
+			<?php }elseif(isset($success[0])){ ?>
   			<div class="alert alert-success" role="alert">
-  				<strong> <?php echo $error[2]; ?> </strong>
+  				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
-			<?php } ?>
+			<?php }if(!isset($success[0])){ ?>
   			<form method="post" enctype="multipart/form-data">
   				<div class="form-group">
   					<label for="fullname">Full Name</label>
@@ -148,6 +146,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
 				</div>
 			</form>
+		<?php } ?>
 		</div>
 	</div>
 
