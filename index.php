@@ -54,6 +54,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			$error[0] = "Fill All Fields";
 		}
 	}
+	else{
+		$error[0] = "Unknown Error";
+	}
 
 ?>
 <!doctype html>
