@@ -7,7 +7,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		$error = array();
 		if(isset($_POST['kyc-submit'])){
 			if(check_code($_POST['xss_code'])){ echo "string";}
-			$error[0]="GO";
+			$error[0]=$_POST['xss_code'];
 		// 	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
 		// 		$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 		// 		$auth = "Bearer ".base64_decode($_GET['token']);
