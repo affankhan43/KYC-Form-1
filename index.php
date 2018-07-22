@@ -89,23 +89,19 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   			<div class="alert alert-danger" role="alert">
   				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
 			</div>
-			<?php } ?>
-			<?php elseif(isset($error[1])){ ?>
+			<?php }elseif(isset($error[1])){ ?>
   			<div class="alert alert-warning" role="alert">
   				<strong>Oh snap!</strong> <?php echo $error[1]; ?>
 			</div>
-			<?php } ?>
-			<?php elseif(isset($error[2])){ ?>
+			<?php }elseif(isset($error[2])){ ?>
   			<div class="alert alert-success" role="alert">
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
-			<?php } ?>
-			<?php elseif(isset($error[3])){ ?>
+			<?php }elseif(isset($error[3])){ ?>
   			<div class="alert alert-success" role="alert">
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
-			<?php } ?>
-			<?php if(!isset($error[3])){ ?>
+			<?php }elseif(!isset($error[3])){ ?>
   			<form method="post" enctype="multipart/form-data">
   				<div class="form-group">
   					<label for="fullname">Full Name</label>
