@@ -4,8 +4,6 @@
 		use \Curl\Curl;
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
-		\session_start();
-
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
 			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
@@ -43,6 +41,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			}
 			else{
 				$data = json_decode($response,true);
+				print_r($data);
 				if($data['success'] == false){
 					$error[2] = $data['error'];
 				}
@@ -91,17 +90,17 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
 			</div>
 			<?php } ?>
-			<?php if(isset($error[1])){ ?>
+			<?php elseif(isset($error[1])){ ?>
   			<div class="alert alert-warning" role="alert">
   				<strong>Oh snap!</strong> <?php echo $error[1]; ?>
 			</div>
 			<?php } ?>
-			<?php if(isset($error[2])){ ?>
+			<?php elseif(isset($error[2])){ ?>
   			<div class="alert alert-success" role="alert">
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
 			<?php } ?>
-			<?php if(isset($error[3])){ ?>
+			<?php elseif(isset($error[3])){ ?>
   			<div class="alert alert-success" role="alert">
   				<strong> <?php echo $error[2]; ?> </strong>
 			</div>
