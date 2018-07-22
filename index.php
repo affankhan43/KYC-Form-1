@@ -6,56 +6,54 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
-			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
-				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
-				$auth = "Bearer ".base64_decode($_GET['token']);
-			/*-- POST --*/
-			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
-			$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['bill']['tmp_name']);
-			$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
-			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
-			$files['bill'] = file_get_contents($_FILES['bill']['tmp_name']);
-			$url = "https://sys.pixiubit.com/api/kyc_form";
-			$curl = curl_init();
-			$boundary = uniqid();
-			$delimiter = '-------------' . $boundary;
-			$post_data = build_data_files($boundary, $fields, $files);
-			curl_setopt_array($curl, array(
-				CURLOPT_URL => $url,
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 30,
-  				CURLOPT_CUSTOMREQUEST => "POST",
-				CURLOPT_POST => 1,
-				CURLOPT_POSTFIELDS => $post_data,
-				CURLOPT_HTTPHEADER => array(
-					"Authorization: ".$auth."",
-					"Content-Type: multipart/form-data; boundary=" . $delimiter,
-					"Content-Length: " . strlen($post_data)),
-			));
-			$response = curl_exec($curl);
-			$err = curl_error($curl);
-			curl_close($curl);
-			if($err){
-				$error[1] = "cURL Error #:" . $err;
-			}
-			else{
-				$data = json_decode($response,true);
-				print_r($data);
-				if($data['success'] == false){
-					$error[2] = $data['error'];
-				}
-				else{
-					$error[3] = $data['message'];
-				}
-			}
-		}
-		else{
-			$error[0] = "Fill All Fields";
-		}
-	}
-	else{
-		$error[0] = "Unknown Error";
+			$error[0]="GO";
+		// 	if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
+		// 		$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+		// 		$auth = "Bearer ".base64_decode($_GET['token']);
+		// 	/*-- POST --*/
+		// 	$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
+		// 	$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['bill']['tmp_name']);
+		// 	$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
+		// 	$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
+		// 	$files['bill'] = file_get_contents($_FILES['bill']['tmp_name']);
+		// 	$url = "https://sys.pixiubit.com/api/kyc_form";
+		// 	$curl = curl_init();
+		// 	$boundary = uniqid();
+		// 	$delimiter = '-------------' . $boundary;
+		// 	$post_data = build_data_files($boundary, $fields, $files);
+		// 	curl_setopt_array($curl, array(
+		// 		CURLOPT_URL => $url,
+		// 		CURLOPT_RETURNTRANSFER => 1,
+		// 		CURLOPT_MAXREDIRS => 10,
+		// 		CURLOPT_TIMEOUT => 30,
+  // 				CURLOPT_CUSTOMREQUEST => "POST",
+		// 		CURLOPT_POST => 1,
+		// 		CURLOPT_POSTFIELDS => $post_data,
+		// 		CURLOPT_HTTPHEADER => array(
+		// 			"Authorization: ".$auth."",
+		// 			"Content-Type: multipart/form-data; boundary=" . $delimiter,
+		// 			"Content-Length: " . strlen($post_data)),
+		// 	));
+		// 	$response = curl_exec($curl);
+		// 	$err = curl_error($curl);
+		// 	curl_close($curl);
+		// 	if($err){
+		// 		$error[1] = "cURL Error #:" . $err;
+		// 	}
+		// 	else{
+		// 		$data = json_decode($response,true);
+		// 		print_r($data);
+		// 		if($data['success'] == false){
+		// 			$error[2] = $data['error'];
+		// 		}
+		// 		else{
+		// 			$error[3] = $data['message'];
+		// 		}
+		// 	}
+		// }
+		// else{
+		// 	$error[0] = "Fill All Fields";
+		// }
 	}
 
 ?>
