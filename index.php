@@ -122,6 +122,10 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
 				<div class="form-group">
+					<label for="address">Nationality</label>
+					<input type="text" class="form-control" name="nationality" placeholder="Nationality" required>
+				</div>
+				<div class="form-group">
 					<label for="address">Phone #</label>
 					<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #">
 				</div>
@@ -141,7 +145,6 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<label for="passport-image">Paid Bill</label>
 					<input type="file" accept="image/*" name="bill" class="form-control-file" required>
 				</div>
-  
 				<div class="form-group">
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
 				</div>
