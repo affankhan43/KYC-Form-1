@@ -84,7 +84,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   </head>
   <body>
   	<div class="container">
-  		<div class="col-md-6 kyc-form">
+  		<div class="col-md-12 kyc-form">
   			<?php if(isset($error[0])){ ?>
   			<div class="alert alert-danger" role="alert">
   				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
