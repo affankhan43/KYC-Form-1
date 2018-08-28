@@ -120,18 +120,22 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 
 					<!-- Nationality & Country -->
 					<div class="row">
-		            	<div class="col-md-6 form-group">
-		            		<label for="nationality">Nationality</label>
-		            		<select class="form-control" name="nationality">
-		            			<option>ZIMBABWEAN</option>
-		            		</select>
-		            	</div>
-		            	<div class="col-md-6 form-group">
-		            		<label for="nationality">Country of Residence</label>
-		            		<select class="form-control" name="country">
-		            			<option>ZIMBABWE</option>
-		            		</select>
-		            	</div>
+						<div class="col-md-6 form-group">
+							<label for="nationality">Nationality</label>
+							<select class="form-control" name="nationality">
+								<?php for ($nat=0; $nat < sizeof($nationality_list); $nat++) { 
+									echo "<option>".$nationality_list[$nat].'</option>';
+								} ?>
+							</select>
+						</div>
+						<div class="col-md-6 form-group">
+							<label for="nationality">Country of Residence</label>
+							<select class="form-control" name="country">
+								<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
+									echo "<option>".$countries_list[$co].'</option>';
+								} ?>
+							</select>
+						</div>
 					</div>
 
 					<!-- Address & City -->
