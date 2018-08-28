@@ -185,14 +185,14 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<br>
 					<div class="row">
 						<div class="col-md-12 form-group">
-							<label for="address">Passport No.</label>
-							<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
+							<label for="address">IBAN No.</label>
+							<input type="text" class="form-control" name="iban_no" placeholder="IBAN Number" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12 form-group">
-							<label for="address">IBAN No.</label>
-							<input type="text" class="form-control" name="iban_no" placeholder="IBAN Number" required>
+							<label for="address">Passport No.</label>
+							<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
 						</div>
 					</div>
 					<div class="row">
