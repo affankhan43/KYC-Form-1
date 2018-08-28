@@ -115,6 +115,18 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<label for="address">Nationality</label>
 					<input type="text" class="form-control" name="nationality" placeholder="Nationality" required>
 				</div>
+				<div class="form-group">
+					<label for="address">Passport No.</label>
+					<input type="text" class="form-control" name="nationality" placeholder="Passport Number" required>
+				</div>
+				<div class="form-group">
+					<label for="address">Passport Issue Date</label>
+					<input type="text" class="form-control" name="nationality" placeholder="Passport Issue" required>
+				</div>
+				<div class="form-group">
+					<label for="address">Passport Expiry Date</label>
+					<input type="text" class="form-control" name="nationality" placeholder="Passport Expiry" required>
+				</div>
 
 				<div class="form-group">
 					<label for="address">Address</label>
