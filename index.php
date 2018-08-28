@@ -13,8 +13,8 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$auth = "Bearer ".base64_decode($_GET['token']);
 			/*-- POST --*/
 			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country_of_residence'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip'],'nationality'=>$_POST['nationality'],'passport_no'=>$_POST['passport_no'],'passport_exp'=>$_POST['passport_exp'],'passport_isu'=>$_POST['passport_isu']);
-			$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name']);
-			$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
+			$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name']);
+			$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
 			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
 			$url = "https://sys.pixiubit.com/api/kyc_form";
 			$curl = curl_init();
@@ -164,7 +164,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				</div>
 				<div class="form-group">
 					<label for="passport">Passport Image</label>
-					<input type="file" accept="image/*" name="passport" class="form-control-file" required>
+					<input type="file" accept="image/*" name="passports" class="form-control-file" required>
 				</div>
 				<div class="form-group">
 					<label for="passport-image">Selfie With Passport</label>
