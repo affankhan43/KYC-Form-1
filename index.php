@@ -1,6 +1,7 @@
 <?php
 		require __DIR__ . '/vendor/autoload.php';
 		include 'core/funcs.php';
+		include 'core/countries.php';
 		use \Curl\Curl;
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
@@ -139,11 +140,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="text" class="form-control" name="state" placeholder="State/Province" required>
 					<br>
 					<select class="form-control" name="country">
-						<option>PAKISTAN</option>
-						<option>INDIA</option>
-						<option>SRILANKA</option>
-						<option>ENGLAND</option>
-						<option>AMERICA</option>
+						<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
+							echo "<option>".$countries_list[$co].'</option>';
+						} ?>
 					</select>
 					<!-- <input type="text" class="form-control" name="country" placeholder="Country" required> -->
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
