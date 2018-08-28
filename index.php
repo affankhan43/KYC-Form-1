@@ -131,15 +131,15 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 
 				<div class="form-group">
 					<label for="address">Passport No.</label>
-					<input type="text" class="form-control" name="nationality" placeholder="Passport Number" required>
+					<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
 				</div>
 				<div class="form-group">
 					<label for="address">Passport Issue Date</label>
-					<input type="text" class="form-control" name="nationality" placeholder="Passport Issue" required>
+					<input type="text" class="form-control" name="passport_isu" placeholder="Passport Issue" required>
 				</div>
 				<div class="form-group">
 					<label for="address">Passport Expiry Date</label>
-					<input type="text" class="form-control" name="nationality" placeholder="Passport Expiry" required>
+					<input type="text" class="form-control" name="passport_exp" placeholder="Passport Expiry" required>
 				</div>
 
 				<div class="form-group">
