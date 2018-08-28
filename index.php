@@ -41,6 +41,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$error[1] = "cURL Error #:" . $err;
 			}
 			else{
+				print_r($response);
 				$data = json_decode($response);
 				if($data->success == false){
 					$error[2] = $data->error;
