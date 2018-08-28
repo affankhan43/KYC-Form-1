@@ -138,7 +138,14 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<br>
 					<input type="text" class="form-control" name="state" placeholder="State/Province" required>
 					<br>
-					<input type="text" class="form-control" name="country" placeholder="Country" required>
+					<select class="form-control" name="country">
+						<option>PAKISTAN</option>
+						<option>INDIA</option>
+						<option>SRILANKA</option>
+						<option>ENGLAND</option>
+						<option>AMERICA</option>
+					</select>
+					<!-- <input type="text" class="form-control" name="country" placeholder="Country" required> -->
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
 				
@@ -157,10 +164,6 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				<div class="form-group">
 					<label for="passport-image">Passport Image</label>
 					<input type="file" accept="image/*" name="passport" class="form-control-file" required>
-				</div>
-				<div class="form-group">
-					<label for="passport-image">Paid Bill</label>
-					<input type="file" accept="image/*" name="bill" class="form-control-file" required>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
