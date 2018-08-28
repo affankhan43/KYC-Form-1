@@ -121,6 +121,15 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					</select>
 				</div>
 				<div class="form-group">
+					<label for="nationality">Country of Residence</label>
+					<select class="form-control" name="country">
+						<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
+							echo "<option>".$countries_list[$co].'</option>';
+						} ?>
+					</select>
+				</div>
+
+				<div class="form-group">
 					<label for="address">Passport No.</label>
 					<input type="text" class="form-control" name="nationality" placeholder="Passport Number" required>
 				</div>
@@ -143,12 +152,6 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<br>
 					<input type="text" class="form-control" name="state" placeholder="State/Province" required>
 					<br>
-					<select class="form-control" name="country">
-						<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
-							echo "<option>".$countries_list[$co].'</option>';
-						} ?>
-					</select>
-					<!-- <input type="text" class="form-control" name="country" placeholder="Country" required> -->
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
 				
