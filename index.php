@@ -7,11 +7,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		session_start();
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
-			if(!empty($_POST['fullname']) && !empty($_POST['street-line-1']) && !empty($_POST['fullname']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
+			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 				$auth = "Bearer ".base64_decode($_GET['token']);
 			/*-- POST --*/
-			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'fullname'=>$_POST['fullname'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
+			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip']);
 			$filenames = array($_FILES['passport']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['bill']['tmp_name']);
 			$files['passport'] = file_get_contents($_FILES['passport']['tmp_name']);
 			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
@@ -102,11 +102,15 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
 			<?php }if(!isset($success[0])){ ?>
-  			<form method="post" enctype="multipart/form-data">
-  				<div class="form-group">
-  					<label for="fullname">Full Name</label>
-  					<input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
-  				</div>
+			<form method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="first_name">First Name</label>
+					<input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+				</div>
+				<div class="form-group">
+					<label for="last_name">Last Name</label>
+					<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+				</div>
 
 				<div class="form-group">
 					<label for="address">Address</label>
