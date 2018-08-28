@@ -111,6 +111,10 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<label for="last_name">Last Name</label>
 					<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
 				</div>
+				<div class="form-group">
+					<label for="address">Nationality</label>
+					<input type="text" class="form-control" name="nationality" placeholder="Nationality" required>
+				</div>
 
 				<div class="form-group">
 					<label for="address">Address</label>
@@ -125,10 +129,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="text" class="form-control" name="country" placeholder="Country" required>
 					<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 				</div>
-				<div class="form-group">
-					<label for="address">Nationality</label>
-					<input type="text" class="form-control" name="nationality" placeholder="Nationality" required>
-				</div>
+				
 				<div class="form-group">
 					<label for="address">Phone #</label>
 					<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #">
