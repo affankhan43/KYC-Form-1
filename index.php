@@ -163,12 +163,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="Area Zipcode">
 				</div>
 				<div class="form-group">
-					<label for="passport-image">Selfie With Passport</label>
-					<input type="file" accept="image/*" name="passport_selfie" class="form-control-file" required>
+					<label for="passport">Passport Image</label>
+					<input type="file" accept="image/*" name="passport" class="form-control-file" required>
 				</div>
 				<div class="form-group">
-					<label for="passport-image">Passport Image</label>
-					<input type="file" accept="image/*" name="passport" class="form-control-file" required>
+					<label for="passport-image">Selfie With Passport</label>
+					<input type="file" accept="image/*" name="passport_selfie" class="form-control-file" required>
 				</div>
 				<div class="form-group">
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
