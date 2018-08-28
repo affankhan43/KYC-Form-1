@@ -158,7 +158,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 									<br>
 									<input type="text" class="form-control" name="state" placeholder="State/Province" required>
   									<br>
-  									<input type="hidden" class="form-control" name="xss_code" value=ZB5liOcFwrkQ4LCUNBBqyc25XEgtoRzeDNdBd0J8Fd8= readonly required>
+  									<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 								</div>
 							</div>
 						</div>
@@ -190,6 +190,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-md-12 form-group">
+							<label for="address">IBAN No.</label>
+							<input type="text" class="form-control" name="iban_no" placeholder="IBAN Number" required>
+						</div>
+					</div>
+					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="address">Passport Issue Date</label>
 							<input type="text" class="form-control" name="passport_isu" placeholder="Passport Issue" required>
@@ -206,11 +212,17 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   						</div>
   					</div>
   					<div class="row">
-  						<div class="form-group col-md-12">
-  						<label for="passport-image">Selfie With Passport</label>
-  						<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
-  						</div>
-  					</div>					
+						<div class="form-group col-md-12">
+						<label for="passport-image">Selfie With Passport</label>
+						<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-12">
+						<label for="passport-image">Bank Statment</label>
+						<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
+						</div>
+					</div>				
 				</div>
 
 				<div class="col-md-12">
