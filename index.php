@@ -113,8 +113,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
 				</div>
 				<div class="form-group">
-					<label for="address">Nationality</label>
-					<input type="text" class="form-control" name="nationality" placeholder="Nationality" required>
+					<label for="nationality">Nationality</label>
+					<select class="form-control" name="nationality">
+						<?php for ($nat=0; $nat < sizeof($nationality_list); $nat++) { 
+							echo "<option>".$nationality_list[$nat].'</option>';
+						} ?>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="address">Passport No.</label>
