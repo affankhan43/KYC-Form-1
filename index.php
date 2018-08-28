@@ -81,6 +81,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		}
 		.form-group>label{
 			font-weight: bold;
+			margin-bottom: 0.2rem;
 		}
 		.border-line{
 			border-right: solid 2px #c8c8c8;
@@ -220,7 +221,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<div class="row">
 						<div class="form-group col-md-12">
 						<label for="passport-image">Bank Statment</label>
-						<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
+						<input type="file" accept="image/*, application/pdf" name="statement" class="form-control-file" required>
 						</div>
 					</div>				
 				</div>
