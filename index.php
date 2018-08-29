@@ -83,7 +83,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		}
 		.form-group>label{
 			font-weight: bold;
-			margin-bottom: 0.2rem;
+			margin-bottom: 0.15rem;
 		}
 		.border-line{
 			border-right: solid 2px #c8c8c8;
@@ -113,7 +113,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			<form class="row" method="post" enctype="multipart/form-data">
 				<div class="col-md-6 border-line">
 					<h2>Personal Information</h2>
-					<br>
+					
 					<!-- First Name & Last Name -->
 					<div class="row">
 						<div class="col-md-6 form-group">
@@ -158,9 +158,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								</div>
 								<div class="col-md-6">
 									<input type="text" class="form-control" name="city" placeholder="City" required>
-									<br>
+									
 									<input type="text" class="form-control" name="state" placeholder="State/Province" required>
-  									<br>
+  									
   									<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 								</div>
 							</div>
