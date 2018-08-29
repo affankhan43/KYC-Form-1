@@ -3,7 +3,7 @@
 		include 'core/funcs.php';
 		include 'core/countries.php';
 		use \Curl\Curl;
-if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
+if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind']) && isset($_GET['sepa'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		session_start();
 		$error = array();
@@ -108,6 +108,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
 			<?php }if(!isset($success[0])){ ?>
+			<?php if($_GET['sepa'] == 1){ ?> 
 			<form class="row" method="post" enctype="multipart/form-data">
 				<div class="col-md-6 border-line">
 					<h2>Personal Information</h2>
@@ -232,6 +233,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					</div>
 				</div>
 			</form>
+			<?php }elseif($_GET['sepa'] == 0){ ?>
 			<form method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="first_name">First Name</label>
@@ -304,7 +306,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
 				</div>
 			</form>
-		<?php } ?>
+			<?php }} ?>
 		</div>
 	</div>
 
