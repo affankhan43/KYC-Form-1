@@ -17,7 +17,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
 				$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
 				$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
-				$files['statements'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
+				$files['statments'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
 				$url = "https://sys.pixiubit.com/api/kyc_form";
 				$curl = curl_init();
 				$boundary = uniqid();
