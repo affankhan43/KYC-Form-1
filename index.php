@@ -35,6 +35,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						"Authorization: ".$auth."",
 						"Content-Type: multipart/form-data; boundary=" . $delimiter,
 						"Content-Length: " . strlen($post_data)),
+						"Accept: application/json"
 				));
 				$response = curl_exec($curl);
 				$err = curl_error($curl);
@@ -57,7 +58,6 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$error[0] = "Fill All Fields";
 			}
 		}
-
 ?>
 <!doctype html>
 <html lang="en">
