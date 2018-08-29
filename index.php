@@ -8,53 +8,54 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		session_start();
 		$error = array();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
-			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip'])){
+			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 				$auth = "Bearer ".base64_decode($_GET['token']);
-			/*-- POST --*/
-			$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country_of_residence'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip'],'nationality'=>$_POST['nationality'],'passport_no'=>$_POST['passport_no'],'passport_exp'=>$_POST['passport_exp'],'passport_isu'=>$_POST['passport_isu']);
-			$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
-			$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
-			$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
-			$files['statements'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
-			$url = "https://sys.pixiubit.com/api/kyc_form";
-			$curl = curl_init();
-			$boundary = uniqid();
-			$delimiter = '-------------' . $boundary;
-			$post_data = build_data_files($boundary, $fields, $files);
-			curl_setopt_array($curl, array(
-				CURLOPT_URL => $url,
-				CURLOPT_RETURNTRANSFER => 1,
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 30,
-				CURLOPT_CUSTOMREQUEST => "POST",
-				CURLOPT_POST => 1,
-				CURLOPT_POSTFIELDS => $post_data,
-				CURLOPT_HTTPHEADER => array(
-					"Authorization: ".$auth."",
-					"Content-Type: multipart/form-data; boundary=" . $delimiter,
-					"Content-Length: " . strlen($post_data)),
-			));
-			$response = curl_exec($curl);
-			$err = curl_error($curl);
-			curl_close($curl);
-			if($err){
-				$error[1] = "cURL Error #:" . $err;
-			}
-			else{
-				$data = json_decode($response);
-				if($data->success == false){
-					$error[2] = $data->error;
+
+				/*-- POST --*/
+				$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country_of_residence'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip'],'nationality'=>$_POST['nationality'],'passport_no'=>$_POST['passport_no'],'passport_exp'=>$_POST['passport_exp'],'passport_isu'=>$_POST['passport_isu'],'employment'=>$_POST['employment']);
+				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
+				$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
+				$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
+				$files['statements'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
+				$url = "https://sys.pixiubit.com/api/kyc_form";
+				$curl = curl_init();
+				$boundary = uniqid();
+				$delimiter = '-------------' . $boundary;
+				$post_data = build_data_files($boundary, $fields, $files);
+				curl_setopt_array($curl, array(
+					CURLOPT_URL => $url,
+					CURLOPT_RETURNTRANSFER => 1,
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 30,
+					CURLOPT_CUSTOMREQUEST => "POST",
+					CURLOPT_POST => 1,
+					CURLOPT_POSTFIELDS => $post_data,
+					CURLOPT_HTTPHEADER => array(
+						"Authorization: ".$auth."",
+						"Content-Type: multipart/form-data; boundary=" . $delimiter,
+						"Content-Length: " . strlen($post_data)),
+				));
+				$response = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if($err){
+					$error[1] = "cURL Error #:" . $err;
 				}
 				else{
-					$success[0] = $data->message;
+					$data = json_decode($response);
+					if($data->success == false){
+						$error[2] = $data->error;
+					}
+					else{
+						$success[0] = $data->message;
+					}
 				}
 			}
+			else{
+				$error[0] = "Fill All Fields";
+			}
 		}
-		else{
-			$error[0] = "Fill All Fields";
-		}
-	}
 
 ?>
 <!doctype html>
