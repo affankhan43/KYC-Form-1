@@ -171,14 +171,18 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="address">Phone #</label>
-							<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #">
+							<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #" required>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="employment">Employment Status</label>
-							<select class="form-control" name="employment">
+							<select class="form-control" name="employment" required>
 								<option>Employed</option>
 								<option>Self-Employment</option>
 							</select>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="address">ZIP Code</label>
+							<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="ZIP Code" required>
 						</div>
 					</div>
 				</div>
