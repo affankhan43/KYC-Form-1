@@ -333,7 +333,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-						<label for="passport-image">Bank Statment</label>
+						<label for="passport-image">Utility Bill/ Bank Statement</label>
 						<input type="file" accept="image/*, application/pdf" name="statement" class="form-control-file" required>
 						</div>
 					</div>				
