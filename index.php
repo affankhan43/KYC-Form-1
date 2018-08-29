@@ -45,6 +45,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				else{
 					$data = json_decode($response);
 					if($data->success == false){
+						print_r($data);
 						$error[2] = $data->error;
 					}
 					else{
