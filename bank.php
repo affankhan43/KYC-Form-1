@@ -121,9 +121,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						<label for="iban">Submit Bank Account Statement</label>
 						<input class="form-control" type="file"  accept="image/*, application/pdf" name="bank_statement" />
 					</div>
-				</div>
-				<div class="form-group col-md-3">
-					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
+					<div class="input-group-md">
+						<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
+					</div>
 				</div>
 			</form>
 			<?php } ?>
