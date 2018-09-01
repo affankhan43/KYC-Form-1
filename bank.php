@@ -122,10 +122,8 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						<input class="form-control" type="file"  accept="image/*, application/pdf" name="bank_statement" />
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="form-group col-md-3 offset-9">
-						<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
-					</div>
+				<div class="form-group col-md-3">
+					<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
 				</div>
 			</form>
 			<?php } ?>
