@@ -88,6 +88,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		.border-line{
 			border-right: solid 2px #c8c8c8;
 		}
+		.bank_form{
+			padding-left: 25px;
+		}
 	</style>
 </head>
   <body>
@@ -110,7 +113,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
 			<?php }if(!isset($success[0])){ ?>
-			<form class="row" method="post" enctype="multipart/form-data">
+			<form class="row bank_form" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group-md">
 						<label for="iban">Bank Account IBAN</label>
