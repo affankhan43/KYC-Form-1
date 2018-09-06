@@ -108,13 +108,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			<div class="alert alert-success" role="alert">
 				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
-			<?php }if(!isset($success[0])){ ?>
-				<div class="alert alert-danger">
-					ONLY <strong>SEPA</strong> REGION BANKING SUPPORTED
-				</div>
-				<div class="alert alert-danger">
-					BANKING STATEMENT MUST NOT BE OLDER THAN <strong>90 DAYS</strong>
-				</div>
+			<?php }if(!isset($success[0])){ ?>	
 			<form class="row bank_form" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group-md">
@@ -127,9 +121,16 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						<input class="form-control" type="file"  accept="image/*, application/pdf" name="bank_statement" />
 						<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
 					</div>
+					<br>
 					<div class="input-group-md">
 						<input type="submit" class="form-control btn btn-primary" name="bnk-submit" value="Submit">
 					</div>
+				</div>
+				<div class="alert alert-danger">
+					ONLY <strong>SEPA</strong> REGION BANKING SUPPORTED
+				</div>
+				<div class="alert alert-danger">
+					BANKING STATEMENT MUST NOT BE OLDER THAN <strong>90 DAYS</strong>
 				</div>
 			</form>
 			<?php } ?>
