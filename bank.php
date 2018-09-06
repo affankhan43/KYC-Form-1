@@ -109,6 +109,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				<strong> <?php echo $success[0]; ?> </strong>
 			</div>
 			<?php }if(!isset($success[0])){ ?>
+				<div class="alert alert-danger">
+					ONLY <strong>SEPA</strong> REGION BANKING SUPPORTED
+				</div>
+				<div class="alert alert-danger">
+					BANKING STATEMENT MUST NOT BE OLDER THAN <strong>90 DAYS</strong>
+				</div>
 			<form class="row bank_form" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<div class="input-group-md">
