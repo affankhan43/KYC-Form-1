@@ -125,12 +125,13 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<div class="input-group-md">
 						<input type="submit" class="form-control btn btn-primary" name="bnk-submit" value="Submit">
 					</div>
-				</div>
-				<div class="alert alert-danger">
-					ONLY <strong>SEPA</strong> REGION BANKING SUPPORTED
-				</div>
-				<div class="alert alert-danger">
-					BANKING STATEMENT MUST NOT BE OLDER THAN <strong>90 DAYS</strong>
+					<br>
+					<div class="alert alert-danger">
+						ONLY <strong>SEPA</strong> REGION BANKING SUPPORTED
+					</div>
+					<div class="alert alert-danger">
+						BANKING STATEMENT MUST NOT BE OLDER THAN <strong>90 DAYS</strong>
+					</div>
 				</div>
 			</form>
 			<?php } ?>
