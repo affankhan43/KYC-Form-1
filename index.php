@@ -49,7 +49,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 						$error[2] = $data->error;
 					}
 					else{
-						$success[0] = $data->message;
+						$success[0] = $data->message.json_encode($data->error);
 					}
 				}
 			}
