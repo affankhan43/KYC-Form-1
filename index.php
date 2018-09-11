@@ -30,7 +30,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
         		}
         	}
         	else{
-        		$check_msg[0] = "Under Maintenance";
+        		$check_msg[0] = "Under Maintenance.";
         	}
         }
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
@@ -266,7 +266,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					</div>
 				<?php }else{ ?>
 					<div class="alert alert-warning" role="alert">
-						<strong>Oh snap!</strong> <?php echo "Under Maintenance"; ?>
+						<strong>Oh snap!</strong> <?php echo "Under Maintenance.."; ?>
 					</div>
 				<?php } ?>
 
