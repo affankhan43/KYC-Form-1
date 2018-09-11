@@ -21,7 +21,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
         }
         else{
         	$checker = $user_check->response;
-        	print_r($checker);
+        	echo json_encode($checker);
         	if(isset($checker->success)){
         		if($checker->success == true){
         			$form_avail = true;
