@@ -265,11 +265,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					<?php } ?>
 				<?php }elseif(isset($check_msg[0])){ ?>
 					<div class="alert alert-warning" role="alert">
-						<strong>Oh snap!</strong> <?php echo $check_msg[0]; ?>
+						<?php echo $check_msg[0]; ?>
 					</div>
 				<?php }else{ ?>
 					<div class="alert alert-warning" role="alert">
-						<strong>Oh snap!</strong> <?php echo "Under Maintenance.."; ?>
+						<?php echo "Under Maintenance.."; ?>
 					</div>
 				<?php } ?>
 
