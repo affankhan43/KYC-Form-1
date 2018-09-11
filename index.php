@@ -7,6 +7,32 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		session_start();
 		$error = array();
+		$user_check = new Curl();
+		$user_check->setHeader('Authorization','Bearer '.base64_decode($_GET['token']));
+		$user_check->setHeader('Content-Type','application/json');
+		$user_check->setHeader('Content-Type','Accept');
+		$user_check->post('https://sys.pixiubit.com/api/user_check',array(
+        	'broker_id'=>$_GET['bind'],
+			'userid'=>$_GET['userid'],
+			'username'=>$_GET['username']
+        ));
+        if ($user_check->error) {
+          $check_msg[0] = "Authentication Failed";
+        }
+        else{
+        	$checker = $user_check->response;
+        	if(isset($checker->success)){
+        		if($checker->success == true){
+        			$form_avail = true;
+        		}
+        		else{
+        			$check_msg[0] = $checker->message;
+        		}
+        	}
+        	else{
+        		$check_msg[0] = "Under Maintenance";
+        	}
+        }
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
 			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
@@ -93,146 +119,157 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   <body>
   	<div class="container">
   		<div class="col-md-12 kyc-form">
-  			<?php if(isset($error[0])){ ?>
-  			<div class="alert alert-danger" role="alert">
-  				<strong>Oh snap!</strong> <?php echo $error[0]; ?>
-			</div>
-			<?php }elseif(isset($error[1])){ ?>
-  			<div class="alert alert-warning" role="alert">
-  				<strong>Oh snap!</strong> <?php echo $error[1]; ?>
-			</div>
-			<?php }elseif(isset($error[2])){ ?>
-  			<div class="alert alert-success" role="alert">
-  				<strong> <?php echo $error[2]; ?> </strong>
-			</div>
-			<?php }elseif(isset($success[0])){ ?>
-			<div class="alert alert-success" role="alert">
-				<strong> <?php echo $success[0]; ?> </strong>
-			</div>
-			<?php }if(!isset($success[0])){ ?>
-			<form class="row" method="post" enctype="multipart/form-data">
-				<div class="col-md-6 border-line">
-					<h2>Personal Information</h2>
-					<br>
-					<!-- First Name & Last Name -->
-					<div class="row">
-						<div class="col-md-6 form-group">
-							<label for="first_name">First Name</label>
-							<input type="text" class="form-control" name="first_name" placeholder="First Name" required>
-						</div>
-						<div class="col-md-6 form-group">
-							<label for="last_name">Last Name</label>
-							<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
-						</div>
-					</div>
-
-					<!-- Nationality & Country -->
-					<div class="row">
-						<div class="col-md-6 form-group">
-							<label for="nationality">Nationality</label>
-							<select class="form-control" name="nationality">
-								<?php for ($nat=0; $nat < sizeof($nationality_list); $nat++) { 
-									echo "<option>".$nationality_list[$nat].'</option>';
-								} ?>
-							</select>
-						</div>
-						<div class="col-md-6 form-group">
-							<label for="nationality">Country of Residence</label>
-							<select class="form-control" name="country">
-								<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
-									echo "<option>".$countries_list[$co].'</option>';
-								} ?>
-							</select>
-						</div>
-					</div>
-
-					<!-- Address & City -->
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="address">Address</label>
-							<div class="row">
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="street-line-1" placeholder="Street Line 1">
-									<br>
-									<input type="text" class="form-control" name="street-line-2" placeholder="Street Line 2">
+  			<?php if(isset($form_avail) && $form_avail==true){
+  					if(isset($error[0])){ ?>
+  						<div class="alert alert-danger" role="alert">
+  							<strong>Oh snap!</strong> <?php echo $error[0]; ?>
+  						</div>
+  					<?php }elseif(isset($error[1])){ ?>
+  						<div class="alert alert-warning" role="alert">
+  							<strong>Oh snap!</strong> <?php echo $error[1]; ?>
+  						</div>
+  					<?php }elseif(isset($error[2])){ ?>
+  						<div class="alert alert-success" role="alert">
+  							<strong> <?php echo $error[2]; ?> </strong>
+  						</div>
+  					<?php }elseif(isset($success[0])){ ?>
+  						<div class="alert alert-success" role="alert">
+  							<strong> <?php echo $success[0]; ?> </strong>
+  						</div>
+  					<?php }if(!isset($success[0])){ ?>
+						<form class="row" method="post" enctype="multipart/form-data">
+							<div class="col-md-6 border-line">
+								<h2>Personal Information</h2>
+								<br>
+								<!-- First Name & Last Name -->
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="first_name">First Name</label>
+										<input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+									</div>
+									<div class="col-md-6 form-group">
+										<label for="last_name">Last Name</label>
+										<input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+									</div>
 								</div>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="city" placeholder="City" required>
-									<br>
-									<input type="text" class="form-control" name="state" placeholder="State/Province" required>
-  									
-  									<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
+
+								<!-- Nationality & Country -->
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label for="nationality">Nationality</label>
+										<select class="form-control" name="nationality">
+											<?php for ($nat=0; $nat < sizeof($nationality_list); $nat++) { 
+												echo "<option>".$nationality_list[$nat].'</option>';
+											} ?>
+										</select>
+									</div>
+									<div class="col-md-6 form-group">
+										<label for="nationality">Country of Residence</label>
+										<select class="form-control" name="country">
+											<?php for ($co=0; $co < sizeof($countries_list); $co++) { 
+												echo "<option>".$countries_list[$co].'</option>';
+											} ?>
+										</select>
+									</div>
+								</div>
+
+								<!-- Address & City -->
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="address">Address</label>
+										<div class="row">
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="street-line-1" placeholder="Street Line 1">
+												<br>
+												<input type="text" class="form-control" name="street-line-2" placeholder="Street Line 2">
+											</div>
+											<div class="col-md-6">
+												<input type="text" class="form-control" name="city" placeholder="City" required>
+												<br>
+												<input type="text" class="form-control" name="state" placeholder="State/Province" required>
+			  									
+			  									<input type="hidden" class="form-control" name="xss_code" value=<?php echo xss_code_generate(); ?> readonly required>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Phone Number & Employment status -->
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="address">Phone #</label>
+										<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #" required>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="employment">Employment Status</label>
+										<select class="form-control" name="employment" required>
+											<option>Employed</option>
+											<option>Self-Employment</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="address">ZIP Code</label>
+										<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="ZIP Code" required>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
 
-					<!-- Phone Number & Employment status -->
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="address">Phone #</label>
-							<input type="text" pattern="^[0-9+()]*$" class="form-control" name="phone" placeholder="Phone #" required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="employment">Employment Status</label>
-							<select class="form-control" name="employment" required>
-								<option>Employed</option>
-								<option>Self-Employment</option>
-							</select>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="address">ZIP Code</label>
-							<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="ZIP Code" required>
-						</div>
-					</div>
-				</div>
+							<div class="col-md-6">
+								<h2>Identity Information</h2>
+								<br>
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<label for="address">Passport No.</label>
+										<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="address">Passport Issue Date</label>
+										<input type="date" class="form-control" name="passport_isu" required>
+			  						</div>
+			  						<div class="form-group col-md-6">
+			  							<label for="address">Passport Expiry Date</label>
+			  							<input type="date" class="form-control" name="passport_exp" required>
+			  						</div>
+			  					</div>
+			  					<div class="row">
+			  						<div class="form-group col-md-12">
+			  							<label for="passport">Passport Image</label>
+			  							<input type="file" accept="image/*, application/pdf" name="passports" class="form-control-file" required>
+			  						</div>
+			  					</div>
+			  					<div class="row">
+									<div class="form-group col-md-12">
+									<label for="passport-image">Selfie With Passport</label>
+									<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-12">
+									<label for="passport-image">Utility Bill / Bank Statment</label>
+									<input type="file" accept="image/*, application/pdf" name="statement_bill" class="form-control-file" required>
+									</div>
+								</div>				
+							</div>
 
-				<div class="col-md-6">
-					<h2>Identity Information</h2>
-					<br>
-					<div class="row">
-						<div class="col-md-12 form-group">
-							<label for="address">Passport No.</label>
-							<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
-						</div>
+							<div class="col-md-12">
+								<div class="form-group col-md-3 offset-9">
+									<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
+								</div>
+							</div>
+						</form>
+					<?php } ?>
+				<?php }elseif(isset($check_msg[0])){ ?>
+					<div class="alert alert-warning" role="alert">
+						<strong>Oh snap!</strong> <?php echo $check_msg[0]; ?>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="address">Passport Issue Date</label>
-							<input type="date" class="form-control" name="passport_isu" required>
-  						</div>
-  						<div class="form-group col-md-6">
-  							<label for="address">Passport Expiry Date</label>
-  							<input type="date" class="form-control" name="passport_exp" required>
-  						</div>
-  					</div>
-  					<div class="row">
-  						<div class="form-group col-md-12">
-  							<label for="passport">Passport Image</label>
-  							<input type="file" accept="image/*, application/pdf" name="passports" class="form-control-file" required>
-  						</div>
-  					</div>
-  					<div class="row">
-						<div class="form-group col-md-12">
-						<label for="passport-image">Selfie With Passport</label>
-						<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
-						</div>
+				<?php }else{ ?>
+					<div class="alert alert-warning" role="alert">
+						<strong>Oh snap!</strong> <?php echo "Under Maintenance"; ?>
 					</div>
-					<div class="row">
-						<div class="form-group col-md-12">
-						<label for="passport-image">Utility Bill / Bank Statment</label>
-						<input type="file" accept="image/*, application/pdf" name="statement_bill" class="form-control-file" required>
-						</div>
-					</div>				
-				</div>
+				<?php } ?>
 
-				<div class="col-md-12">
-					<div class="form-group col-md-3 offset-9">
-						<input type="submit" class="form-control btn btn-primary" name="kyc-submit" value="Submit">
-					</div>
-				</div>
-			</form>
-			<?php } ?>
 		</div>
 	</div>
 
