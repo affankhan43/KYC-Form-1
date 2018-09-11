@@ -6,8 +6,6 @@
 if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) && isset($_GET['bind'])){
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		session_start();
-		$error = array();
-		//$form_avail = true;
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
 			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
@@ -52,7 +50,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					}
 					else{
 						//print_r($data);
-						$success[0] = $data->message.'|'.json_encode($data->error);
+						$success[0] = $data->message;
 					}
 				}
 			}
@@ -122,14 +120,14 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   <body>
   	<div class="container">
   		<div class="col-md-12 kyc-form">
-  			<?php if(isset($form_avail) && $form_avail==true){
+  			<?php if((isset($form_avail) && $form_avail==true) || isset($error[0]) || isset($error[1]) || isset($error[2]) || isset($success[0])){
   					if(isset($error[0])){ ?>
   						<div class="alert alert-danger" role="alert">
-  							<strong>Oh snap!</strong> <?php echo $error[0]; ?>
+  							 <?php echo $error[0]; ?>
   						</div>
   					<?php }elseif(isset($error[1])){ ?>
   						<div class="alert alert-warning" role="alert">
-  							<strong>Oh snap!</strong> <?php echo $error[1]; ?>
+  							 <?php echo $error[1]; ?>
   						</div>
   					<?php }elseif(isset($error[2])){ ?>
   						<div class="alert alert-success" role="alert">
@@ -139,7 +137,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   						<div class="alert alert-success" role="alert">
   							<strong> <?php echo $success[0]; ?> </strong>
   						</div>
-  					<?php }if(!isset($success[0])){ ?>
+  					<?php }else{?>
 						<form class="row" method="post" enctype="multipart/form-data">
 							<div class="col-md-6 border-line">
 								<h2>Personal Information</h2>
