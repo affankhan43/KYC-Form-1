@@ -9,8 +9,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		$error = array();
 		$user_check = new Curl();
 		$user_check->setHeader('Authorization','Bearer '.base64_decode($_GET['token']));
-		$user_check->setHeader('Content-Type','application/json');
-		$user_check->setHeader('Content-Type','Accept');
+		$user_check->setHeader('X-Requested-With', 'XMLHttpRequest');
 		$user_check->post('https://sys.pixiubit.com/api/user_check',array(
         	'broker_id'=>$_GET['bind'],
 			'userid'=>$_GET['userid'],
