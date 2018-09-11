@@ -7,6 +7,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 	if(!empty($_GET['token']) && !empty($_GET['userid']) && !empty($_GET['username']) && !empty($_GET['bind'])){
 		session_start();
 		$error = array();
+		$form_avail = true;
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
 			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
