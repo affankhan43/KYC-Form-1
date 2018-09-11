@@ -17,6 +17,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
         ));
         if ($user_check->error) {
           $check_msg[0] = "Authentication Failed";
+          print_r($user_check);
         }
         else{
         	$checker = $user_check->response;
