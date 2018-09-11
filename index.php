@@ -46,9 +46,11 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				else{
 					$data = json_decode($response);
 					if($data->success == false){
+						print_r($data);
 						$error[2] = $data->error;
 					}
 					else{
+						print_r($data);
 						$success[0] = $data->message.'|'.json_encode($data->error);
 					}
 				}
@@ -57,31 +59,31 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$error[0] = "Fill All Fields";
 			}
 		}
-		$user_check = new Curl();
-		$user_check->setHeader('Authorization','Bearer '.base64_decode($_GET['token']));
-		$user_check->setHeader('X-Requested-With', 'XMLHttpRequest');
-		$user_check->post('https://sys.pixiubit.com/api/user_check',array(
-        	'broker_id'=>$_GET['bind'],
-			'userid'=>$_GET['userid'],
-			'username'=>$_GET['username']
-        ));
-        if ($user_check->error) {
-          $check_msg[0] = "Authentication Failed";
-        }
-        else{
-        	$checker = $user_check->response;
-        	if(isset($checker->success)){
-        		if($checker->success == true){
-        			$form_avail = true;
-        		}
-        		else{
-        			$check_msg[0] = $checker->message;
-        		}
-        	}
-        	else{
-        		$check_msg[0] = "Under Maintenance.";
-        	}
-        }
+		// $user_check = new Curl();
+		// $user_check->setHeader('Authorization','Bearer '.base64_decode($_GET['token']));
+		// $user_check->setHeader('X-Requested-With', 'XMLHttpRequest');
+		// $user_check->post('https://sys.pixiubit.com/api/user_check',array(
+  //       	'broker_id'=>$_GET['bind'],
+		// 	'userid'=>$_GET['userid'],
+		// 	'username'=>$_GET['username']
+  //       ));
+  //       if ($user_check->error) {
+  //         $check_msg[0] = "Authentication Failed";
+  //       }
+  //       else{
+  //       	$checker = $user_check->response;
+  //       	if(isset($checker->success)){
+  //       		if($checker->success == true){
+  //       			$form_avail = true;
+  //       		}
+  //       		else{
+  //       			$check_msg[0] = $checker->message;
+  //       		}
+  //       	}
+  //       	else{
+  //       		$check_msg[0] = "Under Maintenance.";
+  //       	}
+  //       }
 		
 ?>
 <!doctype html>
