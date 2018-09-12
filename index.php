@@ -12,7 +12,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$filenames = array($_FILES['passports']['name'],$_FILES['passport_selfie']['name'],$_FILES['statement_bill']['name']);
 				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[1], PATHINFO_EXTENSION),pathinfo($filenames[2], PATHINFO_EXTENSION));
 				if(in_array($ext[0], $allowed) && in_array($ext[1], $allowed) && in_array($ext[2], $allowed)){
-					if($_FILES['passports']['size'] < 1572864 && $_FILES['passport_selfie']['size']  < 1572864 && $_FILES['statement_bill']['size']  < 1572864 && $_FILES['passports']['size'] != 0 && $_FILES['passport_selfie']['size']  != 0 && $_FILES['statement_bill']['size'] != 0-){
+					if($_FILES['passports']['size'] < 1572864 && $_FILES['passport_selfie']['size']  < 1572864 && $_FILES['statement_bill']['size']  < 1572864 && $_FILES['passports']['size'] != 0 && $_FILES['passport_selfie']['size']  != 0 && $_FILES['statement_bill']['size'] != 0){
 						$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 						$auth = "Bearer ".base64_decode($_GET['token']);
 
