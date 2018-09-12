@@ -237,19 +237,19 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			  					<div class="row">
 			  						<div class="form-group col-md-12">
 			  							<label for="passport">Passport Image</label>
-			  							<input type="file" accept="image/*, application/pdf" name="passports" class="form-control-file" required>
+			  							<input type="file" accept="image/*" name="passports" class="form-control-file" required>
 			  						</div>
 			  					</div>
 			  					<div class="row">
 									<div class="form-group col-md-12">
 									<label for="passport-image">Selfie With Passport</label>
-									<input type="file" accept="image/*, application/pdf" name="passport_selfie" class="form-control-file" required>
+									<input type="file" accept="image/*" name="passport_selfie" class="form-control-file" required>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12">
-									<label for="passport-image">Utility Bill / Bank Statment</label>
-									<input type="file" accept="image/*, application/pdf" name="statement_bill" class="form-control-file" required>
+									<label for="passport-image">Utility Bill / Bank Statment <span class="required">(Not More Than 3Months Old)</span></label>
+									<input type="file" accept="image/*" name="statement_bill" class="form-control-file" required>
 									</div>
 								</div>				
 							</div>
