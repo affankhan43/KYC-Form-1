@@ -12,8 +12,51 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$filenames = array($_FILES['passports']['name'],$_FILES['passport_selfie']['name'],$_FILES['statement_bill']['name']);
 				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[1], PATHINFO_EXTENSION),pathinfo($filenames[2], PATHINFO_EXTENSION));
 				if(in_array($ext[0], $allowed) && in_array($ext[1], $allowed) && in_array($ext[2], $allowed)){
-					if($_FILES['passports']['size'] < 1572864 && $_FILES['passport_selfie']['size']  < 1572864 && $_FILES['statement_bill']['size']  < 1572864){
-						$error[0] = "FILE SIZE MUST BE LESS THAN 1.5 MB".json_encode($ext).json_encode(array($_FILES['passports']['size'],$_FILES['passport_selfie']['size'],$_FILES['statement_bill']['size']));
+					if($_FILES['passports']['size'] < 1572864 && $_FILES['passport_selfie']['size']  < 1572864 && $_FILES['statement_bill']['size']  < 1572864 && $_FILES['passports']['size'] != 0 && $_FILES['passport_selfie']['size']  != 0 && $_FILES['statement_bill']['size'] != 0-){
+						$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
+						$auth = "Bearer ".base64_decode($_GET['token']);
+
+						/*-- POST --*/
+						$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country_of_residence'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip'],'nationality'=>$_POST['nationality'],'passport_no'=>$_POST['passport_no'],'passport_exp'=>$_POST['passport_exp'],'passport_isu'=>$_POST['passport_isu'],'employment'=>$_POST['employment']);
+						$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
+						$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
+						$files['statments'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
+						$url = "https://sys.pixiubit.com/api/kyc_form";
+						$curl = curl_init();
+						$boundary = uniqid();
+						$delimiter = '-------------' . $boundary;
+						$post_data = build_data_files($boundary, $fields, $files);
+						curl_setopt_array($curl, array(
+							CURLOPT_URL => $url,
+							CURLOPT_RETURNTRANSFER => 1,
+							CURLOPT_MAXREDIRS => 10,
+							CURLOPT_TIMEOUT => 30,
+							CURLOPT_CUSTOMREQUEST => "POST",
+							CURLOPT_POST => 1,
+							CURLOPT_POSTFIELDS => $post_data,
+							CURLOPT_HTTPHEADER => array(
+								"Authorization: ".$auth."",
+								"Content-Type: multipart/form-data; boundary=" . $delimiter,
+								"Content-Length: " . strlen($post_data)),
+								"Accept: application/json"
+						));
+						$response = curl_exec($curl);
+						$err = curl_error($curl);
+						curl_close($curl);
+						if($err){
+							$error[1] = "cURL Error #:" . $err;
+						}
+						else{
+							$data = json_decode($response);
+							if($data->success == false){
+								//print_r($data);
+								$error[2] = $data->error;
+							}
+							else{
+								//print_r($data);
+								$success[0] = $data->message;
+							}
+						}
 					}
 					else{
 						$error[0] = "FILE SIZE MUST BE LESS THAN 1.5 MB".json_encode($ext);
