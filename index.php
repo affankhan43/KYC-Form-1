@@ -12,7 +12,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
 				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[1], PATHINFO_EXTENSION),pathinfo($filenames[2], PATHINFO_EXTENSION));
 				if(in_array($ext[0], $allowed) || in_array($ext[1], $allowed) || in_array($ext[2], $allowed)){
-					if($_FILES['passports']['size'] || $_FILES['passport_selfie']['size'] || $_FILES['statement_bill']['size']){
+					if($_FILES['passports']['size'] <= 1572864 || $_FILES['passport_selfie']['size']  <= 1572864 || $_FILES['statement_bill']['size']  <= 1572864){
 
 					}
 					else{
