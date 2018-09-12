@@ -63,7 +63,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					}
 				}
 				else{
-					$error[0] = "DOCUMENTS ONLY ACCEPTED IN JPG, JPEG, PNG FORMAT";
+					$error[0] = "DOCUMENTS ONLY ACCEPTED IN JPG, JPEG, PNG FORMAT".json_encode($ext);
 				}
 			}
 			else{
