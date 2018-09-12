@@ -10,7 +10,13 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
 				$allowed =  array('png' ,'jpg','PNG','JPG','JPEG','jpeg');
 				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
-				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[0], PATHINFO_EXTENSION));
+				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[1], PATHINFO_EXTENSION),pathinfo($filenames[2], PATHINFO_EXTENSION));
+				if(!in_array($ext[0], $allowed) || !in_array($ext[1], $allowed) || !in_array($ext[2], $allowed)){
+
+				}
+				else{
+
+				}
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 				$auth = "Bearer ".base64_decode($_GET['token']);
 
