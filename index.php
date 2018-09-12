@@ -12,6 +12,12 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
 				$ext = array(pathinfo($filenames[0], PATHINFO_EXTENSION),pathinfo($filenames[1], PATHINFO_EXTENSION),pathinfo($filenames[2], PATHINFO_EXTENSION));
 				if(in_array($ext[0], $allowed) || in_array($ext[1], $allowed) || in_array($ext[2], $allowed)){
+					if($_FILES['passports']['size'] || $_FILES['passport_selfie']['size'] || $_FILES['statement_bill']['size']){
+
+					}
+					else{
+						$error[0] = "FILE SIZE MUST BE LESS THAN 1.5 MB";
+					}
 					$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 					$auth = "Bearer ".base64_decode($_GET['token']);
 
@@ -58,7 +64,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 					}
 				}
 				else{
-					$error[0] = "FILES ONLY ACCEPTED IN JPG, JPEG, PNG FORMAT";
+					$error[0] = "DOCUMENTS ONLY ACCEPTED IN JPG, JPEG, PNG FORMAT";
 				}
 			}
 			else{
