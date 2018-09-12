@@ -8,12 +8,14 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		session_start();
 		if(isset($_POST['kyc-submit']) && check_code($_POST['xss_code'])){
 			if(!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['street-line-1']) && !empty($_POST['city']) && !empty($_POST['state']) && !empty($_POST['country']) && !empty($_POST['phone']) && !empty($_POST['zip']) && !empty($_POST['passport_no']) && !empty($_POST['passport_exp']) && !empty($_POST['passport_isu'])){
+				$allowed =  array('png' ,'jpg','PNG','JPG','JPEG','jpeg');
+				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
+				$ext = pathinfo(, PATHINFO_EXTENSION);
 				$address = $_POST['street-line-1']." ,".$_POST['street-line-2'];
 				$auth = "Bearer ".base64_decode($_GET['token']);
 
 				/*-- POST --*/
 				$fields = array('broker_id' => $_GET['bind'], 'userid'=>$_GET['userid'],'username'=>$_GET['username'],'first_name'=>$_POST['first_name'],'last_name'=>$_POST['last_name'],'address'=>$address,'country_of_residence'=>$_POST['country'],'city'=>$_POST['city'],'state'=>$_POST['state'],'phone'=>$_POST['phone'],'postal_code'=>$_POST['zip'],'nationality'=>$_POST['nationality'],'passport_no'=>$_POST['passport_no'],'passport_exp'=>$_POST['passport_exp'],'passport_isu'=>$_POST['passport_isu'],'employment'=>$_POST['employment']);
-				$filenames = array($_FILES['passports']['tmp_name'],$_FILES['passport_selfie']['tmp_name'],$_FILES['statement_bill']['tmp_name']);
 				$files['passport'] = file_get_contents($_FILES['passports']['tmp_name']);
 				$files['passport_selfie'] = file_get_contents($_FILES['passport_selfie']['tmp_name']);
 				$files['statments'] = file_get_contents($_FILES['statement_bill']['tmp_name']);
@@ -248,7 +250,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12">
-									<label for="passport-image">Utility Bill / Bank Statment <span class="required">(Not More Than 3Months Old)</span></label>
+									<label for="passport-image">Utility Bill / Bank Statment <span class="required">(Not More Than 3 Months Old)</span></label>
 									<input type="file" accept="image/*" name="statement_bill" class="form-control-file" required>
 									</div>
 								</div>				
