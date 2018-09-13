@@ -245,16 +245,19 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 									<div class="form-group col-md-6">
 										<label for="address">Passport Issue Date</label>
 										<input type="date" class="form-control" name="passport_isu" required>
-			  						</div>
-			  						<div class="form-group col-md-6">
+									</div>
+									<div class="form-group col-md-6">
 			  							<label for="address">Passport Expiry Date</label>
 			  							<input type="date" class="form-control" name="passport_exp" required>
 			  						</div>
 			  					</div>
-			  					<div class="row">
-			  						<div class="form-group col-md-12">
-			  							<label for="passport">Passport Image</label>
-			  							<input type="file" accept="image/*" name="passports" class="form-control-file" required>
+								 <div class="alert alert-danger">
+								 	FILE SIZE MUST BE LESS THAN <strong>1.5 MB</strong>
+								 </div>
+								<div class="row">
+									<div class="form-group col-md-12">
+										<label for="passport">Passport Image</label>
+										<input type="file" accept="image/*" name="passports" class="form-control-file" required>
 			  						</div>
 			  					</div>
 			  					<div class="row">
