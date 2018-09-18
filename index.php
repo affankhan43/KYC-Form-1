@@ -150,7 +150,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   						<div class="alert alert-success" role="alert">
   							<strong> <?php echo $error[2]; ?> </strong>
   						</div>
-  					<?php }elseif(isset($success[0])){ ?>
+  					<?php }if(isset($success[0])){ ?>
   						<div class="alert alert-success" role="alert">
   							<strong> <?php echo $success[0]; ?> </strong>
   						</div>
