@@ -81,7 +81,8 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 		$user_check->post('https://sys.pixiubit.com/api/user_check',array(
         	'broker_id'=>$_GET['bind'],
 			'userid'=>$_GET['userid'],
-			'username'=>$_GET['username']
+			'username'=>$_GET['username'],
+			'message'=>'kyc'
         ));
         if ($user_check->error) {
           $check_msg[0] = "Authentication Failed";
