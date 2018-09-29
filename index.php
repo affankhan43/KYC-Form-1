@@ -228,7 +228,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 									</div>
 									<div class="form-group col-md-6">
 										<label for="address">ZIP Code</label>
-										<input type="text" pattern="^[0-9]*$" class="form-control" name="zip" placeholder="ZIP Code" required>
+										<input type="text" class="form-control" name="zip" placeholder="ZIP Code" required>
 									</div>
 								</div>
 							</div>
@@ -238,17 +238,17 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								<br>
 								<div class="row">
 									<div class="col-md-12 form-group">
-										<label for="address">Passport No.</label>
+										<label for="address">Passport No. / National ID</label>
 										<input type="text" class="form-control" name="passport_no" placeholder="Passport Number" required>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-6">
-										<label for="address">Passport Issue Date</label>
+										<label for="address">Passport / National Issue Date</label>
 										<input type="date" class="form-control" name="passport_isu" required>
 									</div>
 									<div class="form-group col-md-6">
-			  							<label for="address">Passport Expiry Date</label>
+			  							<label for="address">Passport / National Expiry Date</label>
 			  							<input type="date" class="form-control" name="passport_exp" required>
 			  						</div>
 			  					</div>
@@ -257,7 +257,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								 </div>
 								<div class="row">
 									<div class="form-group col-md-12">
-										<label for="passport">Passport Image</label>
+										<label for="passport">Passport / National Card Image</label>
 										<input type="file" accept="image/*" name="passports" class="form-control-file" required>
 			  						</div>
 			  					</div>
