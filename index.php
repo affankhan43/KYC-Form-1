@@ -38,6 +38,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 									CURLOPT_POSTFIELDS => $post_data,
 									CURLOPT_HTTPHEADER => array(
 										"Authorization: ".$auth."",
+										"X-Requested-With: XMLHttpRequest",
 										"Content-Type: multipart/form-data; boundary=" . $delimiter,
 										"Content-Length: " . strlen($post_data)),
 										"Accept: application/json"
