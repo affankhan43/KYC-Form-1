@@ -44,7 +44,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 										"Accept: application/json"
 								));
 								$response = curl_exec($curl);
-								echo json_encode($response);
+								//echo json_encode($response);
 								$err = curl_error($curl);
 								curl_close($curl);
 								if($err){
