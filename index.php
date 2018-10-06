@@ -48,7 +48,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								$err = curl_error($curl);
 								curl_close($curl);
 								if($err){
-									$error[1] = "cURL Error #:" . $err;
+									$error[0] = "cURL Error #:" . $err;
 								}
 								else{
 									$data = json_decode($response);
@@ -150,17 +150,13 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
   <body>
   	<div class="container">
   		<div class="col-md-12 kyc-form">
-  			<?php if((isset($form_avail) && $form_avail==true) || isset($error[0]) || isset($error[1]) || isset($error[2]) || isset($success[0])){
+  			<?php if((isset($form_avail) && $form_avail==true) || isset($error[0]) || isset($error[2]) || isset($success[0])){
   					if(isset($error[0])){ ?>
   						<div class="alert alert-danger" role="alert">
   							 <?php echo $error[0]; ?>
   						</div>
-  					<?php }elseif(isset($error[1])){ ?>
-  						<div class="alert alert-warning" role="alert">
-  							 <?php echo $error[1]; ?>
-  						</div>
   					<?php }elseif(isset($error[2])){ ?>
-  						<div class="alert alert-success" role="alert">
+  						<div class="alert alert-warning" role="alert">
   							<strong> <?php echo $error[2]; ?> </strong>
   						</div>
   					<?php }if(isset($success[0])){ ?>
