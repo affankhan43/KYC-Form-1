@@ -38,7 +38,7 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 									CURLOPT_POSTFIELDS => $post_data,
 									CURLOPT_HTTPHEADER => array(
 										"Authorization: ".$auth."",
-										"X-Requested-With: XMLHttpRequest",
+										//"X-Requested-With: XMLHttpRequest",
 										"Content-Type: multipart/form-data; boundary=" . $delimiter,
 										"Content-Length: " . strlen($post_data)),
 										"Accept: application/json"
@@ -52,13 +52,18 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
 								}
 								else{
 									$data = json_decode($response);
-									if($data->success == false){
-										//print_r($data);
-										$error[2] = $data->error;
+									if(isset($data->success)){
+										if($data->success == false){
+											//print_r($data);
+											$error[2] = $data->error;
+										}
+										else{
+											//print_r($data);
+											$success[0] = $data->message;
+										}
 									}
 									else{
-										//print_r($data);
-										$success[0] = $data->message;
+										$error[0] = "Network Error";
 									}
 								}
 							}
