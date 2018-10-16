@@ -110,6 +110,9 @@ if(isset($_GET['token']) && isset($_GET['userid']) && isset($_GET['username']) &
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<title>Alladin | KYC</title>
 	<style type="text/css">
+		html{
+			overflow: hidden;
+		}
 		body{
 			font-family: 'Roboto', sans-serif;
 		}
